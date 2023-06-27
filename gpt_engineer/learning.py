@@ -7,14 +7,14 @@ from datetime import datetime
 from pathlib import Path
 from typing import List, Optional
 
-from dataclasses_json import dataclass_json
+# from dataclasses_json import dataclass_json
 from termcolor import colored
 
 from gpt_engineer.db import DB, DBs
 from gpt_engineer.domain import Step
 
 
-@dataclass_json
+# @dataclass_json
 @dataclass
 class Review:
     ran: Optional[bool]
@@ -24,7 +24,7 @@ class Review:
     raw: str
 
 
-@dataclass_json
+# @dataclass_json
 @dataclass
 class Learning:
     model: str

@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+import os
 import json
 import logging
 import shutil
@@ -8,7 +11,7 @@ import typer
 
 from gpt_engineer import steps
 from gpt_engineer.ai import AI, fallback_model
-from gpt_engineer.collect import collect_learnings
+# from gpt_engineer.collect import collect_learnings
 from gpt_engineer.db import DB, DBs
 from gpt_engineer.steps import STEPS
 
@@ -17,7 +20,7 @@ app = typer.Typer()
 
 @app.command()
 def main(
-    project_path: str = typer.Argument("example", help="path"),
+    project_path: str = os.getenv('project_dir'),
     delete_existing: bool = typer.Argument(False, help="delete existing files"),
     model: str = typer.Argument("gpt-4", help="model id string"),
     temperature: float = 0.1,
@@ -64,7 +67,7 @@ def main(
         messages = step(ai, dbs)
         dbs.logs[step.__name__] = json.dumps(messages)
 
-    collect_learnings(model, temperature, steps, dbs)
+    # collect_learnings(model, temperature, steps, dbs)
 
 
 if __name__ == "__main__":
